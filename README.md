@@ -56,13 +56,13 @@ import { add, filter, repeat } from '../utils';
 npm
 
 ```shell script
-npm install --save-dev @trivago/prettier-plugin-sort-imports
+npm install --save-dev @forivall/prettier-plugin-sort-imports
 ```
 
 or, using yarn
 
 ```shell script
-yarn add --dev @trivago/prettier-plugin-sort-imports
+yarn add --dev @forivall/prettier-plugin-sort-imports
 ```
 
 **Note: If you are migrating from v2.x.x to v3.x.x, [Please Read Migration Guidelines](./docs/MIGRATION.md)**
@@ -91,7 +91,7 @@ module.exports = {
 ```js
 module.exports = {
     ...
-    "plugins": ["@trivago/prettier-plugin-sort-imports"]
+    "plugins": ["@forivall/prettier-plugin-sort-imports"]
 }
 ```
 
