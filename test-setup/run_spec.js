@@ -4,6 +4,7 @@ const fs = require('fs');
 const extname = require('path').extname;
 const prettier = require('prettier');
 
+/** @type {import('./run_spec').RunSpecFn} */
 function run_spec(dirname, parsers, options) {
     options = Object.assign(
         {
@@ -31,15 +32,23 @@ function run_spec(dirname, parsers, options) {
             const mergedOptions = Object.assign({}, options, {
                 parser: parsers[0],
             });
-            const output = prettyprint(source, path, mergedOptions);
-            test(`${filename} - ${mergedOptions.parser}-verify`, () => {
+            let getOutput = () => {
                 try {
-                    expect(
-                        raw(source + '~'.repeat(80) + '\n' + output),
-                    ).toMatchSnapshot(filename);
-                } catch (e) {
-                    console.error(e, path);
+                    const output = prettyprint(source, path, mergedOptions);
+                    getOutput = () => output;
+                    return output;
+                } catch (error) {
+                    getOutput = () => {
+                        throw error;
+                    }
+                    return error;
                 }
+            }
+            test(`${filename} - ${mergedOptions.parser}-verify`, () => {
+                const output = getOutput();
+                expect(
+                    raw(source + '~'.repeat(80) + '\n' + output),
+                ).toMatchSnapshot(filename);
             });
 
             parsers.slice(1).forEach((parserName) => {
@@ -52,6 +61,7 @@ function run_spec(dirname, parsers, options) {
                         path,
                         verifyOptions,
                     );
+                    const output = getOutput();
                     expect(output).toEqual(verifyOutput);
                 });
             });
