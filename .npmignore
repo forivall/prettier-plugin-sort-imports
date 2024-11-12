@@ -1,8 +1,8 @@
 # Directories
-src/
+/src/
 tests/
 test-setup/
-**/__tests__
+**/__tests__/
 examples/
 docs/
 public/
@@ -19,3 +19,4 @@ yarn.lock
 tsconfig.json
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
+/*.tgz
