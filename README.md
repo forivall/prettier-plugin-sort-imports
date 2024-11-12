@@ -114,6 +114,12 @@ To move the third party imports at desired place, you can use `<THIRD_PARTY_MODU
 "importOrder": ["^@core/(.*)$", "<THIRD_PARTY_MODULES>", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
 ```
 
+To manually add new line separation between groups, use `<SEPARATOR>` between your groups:
+
+```
+"importOrder": ["<SEPARATOR>", "^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "<SEPARATOR>", "^[./]"],
+```
+
 #### `importOrderSeparation`
 
 **type**: `boolean`
@@ -122,6 +128,7 @@ To move the third party imports at desired place, you can use `<THIRD_PARTY_MODU
 
 A boolean value to enable or disable the new line separation
 between sorted import declarations group. The separation takes place according to the `importOrder`.
+This is functionally equivalent to adding `<SEPARATOR>` between each of your groups.
 
 ```
 "importOrderSeparation": true,
